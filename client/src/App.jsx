@@ -10,7 +10,7 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route index element={<TitleScreen />} />
-                    <Route path="/RoadMap" element={<RoadMap />} />
+                    <Route path="/road-map" element={<RoadMap />} />
                 </Routes>
             </BrowserRouter>
         </>

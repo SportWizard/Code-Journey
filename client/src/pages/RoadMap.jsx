@@ -1,30 +1,47 @@
 import { motion } from "framer-motion";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
-function CreateCoursesTabs({ courses }) {
+const requestURL = "http://localhost:8080/road-map";
+
+function CreateCoursesTabs({ type }) {
+    const [courses, setCourses] = useState([]);
+    const [loaded, setLoaded] = useState(false);
+
+    useEffect(() => {
+        axios.get(requestURL + type)
+        .then((res) => {
+            if (res.status === 200) {
+                console.log("Data fetched successfully");
+
+                setCourses(res.data);
+                setLoaded(true);
+            }
+            else {
+                console.log("Request was not successful");
+            }
+        })
+        .catch((err) => {
+            console.error('Error fetching data:', err);
+        });
+    }, [type]); // Only trigger fetch when "type" changes
+
+    if (!loaded)
+        return <p>Loading...</p>
+    
     return (
-        <>
-            
-        </>
+        <div>
+            {courses.map((course, index) => (
+                <div key={index} className="courses">
+                    <h1>{course.name}</h1>
+                    <p>{course.tier}</p>
+                </div>
+            ))}
+        </div>
     );
 }
 
 function RoadMap() {
-
-    const mainCourses = [
-        ["Python"],
-        ["Java"],
-        ["Advance Java"],
-        ["Data Structures"],
-        ["Advance Data Structure", "Software Design"],
-    ];
-    const extraCourses = [
-        ["Web Development"],
-        ["Version Control"],
-        [],
-        [],
-        ["Database"]
-    ];
-
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -32,14 +49,9 @@ function RoadMap() {
             transition={{ duration: 1 }}
         >
             {/* Main Courses */}
-            <div style={{ backgroundColor: "#2C3E50" }}>
-                <CreateCoursesTabs courses={mainCourses} />
-            </div>
+            <CreateCoursesTabs type={"/main"} />
 
             {/* Extra Courses */}
-            <div style={{ backgroundColor: "#FFD54F" }}>
-                Hello
-            </div>
         </motion.div>
     );
 }

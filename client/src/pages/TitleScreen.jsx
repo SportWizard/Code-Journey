@@ -14,7 +14,7 @@ function TitleScreen() {
 
     const animationComplete = () => {
         if (transition)
-            navigate("/RoadMap");
+            navigate("/road-map");
     }
 
     return(
