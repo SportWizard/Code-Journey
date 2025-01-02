@@ -34,3 +34,18 @@ app.get("/road-map/main", (req, res) => {
         return res.status(200).json(data);
     });
 });
+
+app.get("/road-map/extra", (req, res) => {
+    const query = "SELECT courses.name, courses.tier FROM courses WHERE courses.type = \"E\" ORDER BY courses.tier";
+    
+    db.query(query, (err, data) => {
+        if (err) {
+            console.log("API error: /road-map/extra");
+            console.log(err);
+            
+            return res.status(500);
+        }
+        
+        return res.status(200).json(data);
+    });
+});

@@ -1,0 +1,39 @@
+.courses {
+    margin: 0px 20px;
+}
+
+.courses h1 {
+    margin-left: 10px;
+}
+
+.courseButtons {
+    border-radius: 10px;
+    position: relative;
+    height: 80px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 10px;
+    background-color: #af6deb;
+}
+
+.courseButtons:hover {
+    background-color: #8a2be2;
+}
+
+.courseButtons:active {
+    transform: scale(0.98);
+    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
+.courseButtons h1 {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.courseButtons p {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 10px;
+    padding-right: 20px;
+}

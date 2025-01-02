@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import "../styles/RoadMap.css";
 
 const requestURL = "http://localhost:8080/road-map";
 
@@ -30,14 +31,14 @@ function CreateCoursesTabs({ type }) {
         return <p>Loading...</p>
     
     return (
-        <div>
+        <>
             {courses.map((course, index) => (
-                <div key={index} className="courses">
+                <button key={index} className="courseButtons">
                     <h1>{course.name}</h1>
-                    <p>{course.tier}</p>
-                </div>
+                    <p>Tier: {course.tier}</p>
+                </button>
             ))}
-        </div>
+        </>
     );
 }
 
@@ -49,9 +50,16 @@ function RoadMap() {
             transition={{ duration: 1 }}
         >
             {/* Main Courses */}
-            <CreateCoursesTabs type={"/main"} />
+            <div className="courses">
+                <h1>Main Courses</h1>
+                <CreateCoursesTabs type={"/main"} />
+            </div>
 
             {/* Extra Courses */}
+            <div className="courses">
+                <h1>Extra Courses</h1>
+                <CreateCoursesTabs type={"/extra"} />
+            </div>
         </motion.div>
     );
 }
